@@ -1,13 +1,13 @@
 import { test, expect, Page } from "@playwright/test";
 import { faker } from "@faker-js/faker";
-import { Gender, Hobby } from "../enums/enum_btth1";
+import { Gender, Hobby } from "../enums/btth1.enum";
 import {
   GENDER,
   HOBBIES,
   INTERESTS,
   COUNTRIES,
   UserDataType,
-} from "../types/types_btth1";
+} from "../types/btth1.type";
 
 const BASE_URL =
   "https://material.playwrightvn.com/01-xpath-register-page.html";
@@ -58,8 +58,11 @@ const generateUserData = (): UserDataType => {
   };
 };
 
-test("check gender male to be checked", async ({ page }) => {
+test.beforeEach(async ({ page }) => {
   await page.goto(BASE_URL);
+});
+
+test("check gender male to be checked", async ({ page }) => {
   await fillData(page, {
     gender: Gender.MALE,
   });
@@ -70,7 +73,6 @@ test("check gender male to be checked", async ({ page }) => {
 });
 
 test("check gender female to be checked", async ({ page }) => {
-  await page.goto(BASE_URL);
   await fillData(page, {
     gender: Gender.FEMALE,
   });
@@ -81,7 +83,6 @@ test("check gender female to be checked", async ({ page }) => {
 });
 
 test("check one hobbies to be checked", async ({ page }) => {
-  await page.goto(BASE_URL);
   await fillData(page, {
     hobbies: [Hobby.READING],
   });
@@ -92,7 +93,6 @@ test("check one hobbies to be checked", async ({ page }) => {
 });
 
 test("check two hobbies to be checked", async ({ page }) => {
-  await page.goto(BASE_URL);
   await fillData(page, {
     hobbies: [Hobby.READING, Hobby.TRAVELING],
   });
@@ -106,7 +106,6 @@ test("check two hobbies to be checked", async ({ page }) => {
 });
 
 test("check three hobbies to be checked", async ({ page }) => {
-  await page.goto(BASE_URL);
   await fillData(page, {
     hobbies: [Hobby.READING, Hobby.TRAVELING, Hobby.COOKING],
   });
@@ -126,7 +125,6 @@ test("register with random data", async ({ page }) => {
   const userData = generateUserData();
   console.log(userData);
 
-  await page.goto(BASE_URL);
   await fillData(page, userData);
   await page.click('button[type="submit"]');
 

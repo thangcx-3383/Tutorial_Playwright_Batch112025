@@ -1,4 +1,4 @@
-import { Gender, Hobby, Interest, Country } from "../enums/enum_btth1";
+import { Gender, Hobby, Interest, Country } from "../enums/btth1.enum";
 
 export const GENDER = Object.values(Gender);
 export const HOBBIES = Object.values(Hobby);
