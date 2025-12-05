@@ -68,6 +68,23 @@ export default defineConfig({
     //   name: "Google Chrome",
     //   use: { ...devices["Desktop Chrome"], channel: "chrome" },
     // },
+
+    // Setup project để chạy .setup.ts files
+    {
+      name: "setup",
+      testMatch: /.*\.setup\.ts$/, // ✅ Nhận diện .setup.ts files
+      use: { ...devices["Desktop Chrome"] },
+    },
+
+    // Main test projects
+    {
+      name: "chromium",
+      use: {
+        ...devices["Desktop Chrome"],
+        storageState: "playwright/.auth/user.json", // Sử dụng auth state
+      },
+      dependencies: ["setup"], // Chạy setup trước
+    },
   ],
 
   /* Run your local dev server before starting the tests */
